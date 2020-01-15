@@ -49,4 +49,49 @@ public class Student {
         gpa = aGpa;
     }
 
+    public String getGradeLevel(int numberOfCredits) {
+        String gradeLevel = "";
+
+        if (numberOfCredits < 30) {
+            gradeLevel = "Freshman";
+        } else if (numberOfCredits < 60) {
+            gradeLevel = "Sophomore";
+        } else if (numberOfCredits < 90) {
+            gradeLevel = "Junior";
+        } else {
+            gradeLevel = "Senior";
+        }
+
+        return gradeLevel;
+    }
+
+    public void addGrade(int creditsAdded, double grade) {
+        double currentQualityScore = gpa * numberOfCredits;
+        double addedQualityScore = creditsAdded * grade;
+        double newQualityScore = currentQualityScore + addedQualityScore;
+        numberOfCredits += creditsAdded;
+        gpa = newQualityScore / numberOfCredits;
+    }
+
+    public String toString() {
+        return name + " (Credits: " + numberOfCredits + ", GPA: " + gpa + ")";
+    }
+
+    public boolean equals(Object toBeCompared) {
+        if (toBeCompared == this) {
+            return true;
+        }
+
+        if (toBeCompared == null) {
+            return false;
+        }
+
+        if (toBeCompared.getClass() != getClass()) {
+            return false;
+        }
+
+        Student theStudent = (Student) toBeCompared;
+        return theStudent.getStudentId() == getStudentId();
+    }
+
 }
